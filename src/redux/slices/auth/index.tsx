@@ -2,19 +2,24 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AuthState } from './interface';
 
 const initialState = {
-  isConnectWallet: false,
+  modal: false,
+  modaldata: null,
 } as AuthState;
 
 const AuthSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setIsConnectWallet(init, action) {
+    setModal(init, action) {
       const state = init;
-      state.isConnectWallet = action.payload;
+      state.modal = action.payload;
+    },
+    setModalData(init, action) {
+      const state = init;
+      state.modaldata = action.payload;
     },
   },
 });
 
-export const { setIsConnectWallet } = AuthSlice.actions;
+export const { setModal, setModalData } = AuthSlice.actions;
 export default AuthSlice.reducer;

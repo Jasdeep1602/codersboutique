@@ -1,13 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { setModal, setModalData } from '@/redux/slices/auth';
 
 export default function BigCard() {
-  const [open, setOpen] = useState(true);
+  const { modal, modaldata } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
   return (
-    <Dialog open={open} onClose={setOpen} className='relative z-10 '>
+    <Dialog
+      open={modal}
+      onClose={() => dispatch(setModal(false))}
+      className='relative z-10 '>
       <DialogBackdrop
         transition
         className=' fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in'
@@ -22,11 +29,11 @@ export default function BigCard() {
               <div className='flex flex-col justify-start '>
                 <div className='flex justify-between items-center '>
                   <div className='text-lg font-semibold text-bookmark-blue flex space-x-1 items-center mb-2'>
-                    <span>Frontend Developer</span>
+                    <span>{modaldata?.JobTitle}</span>
                   </div>
                   <span className='bg-green-500 rounded-full uppercase text-white text-sm px-4 py-1 font-bold shadow-xl'>
                     {' '}
-                    Full-Time{' '}
+                    {modaldata?.JobType}{' '}
                   </span>
                 </div>
                 <div className='flex w-full '>
@@ -43,7 +50,7 @@ export default function BigCard() {
                       />
                       <path d='M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z' />
                     </svg>
-                    <span>Coders</span>
+                    <span>{modaldata?.CompanyName}</span>
                   </div>
                   <div className='text-sm text-gray-500 flex w-1/2  space-x-1 items-center'>
                     <svg
@@ -57,19 +64,20 @@ export default function BigCard() {
                         clipRule='evenodd'
                       />
                     </svg>
-                    <span>Bangla, CA</span>
+                    <span>{modaldata?.Location}</span>
                   </div>
                 </div>
-                <div className='flex-col w-full pt-4 gap-8 '>
-                  <div className='text-sm text-gray-500 flex   space-x-1 items-center'>
-                    Description: Build responsive web applications with a focus
-                    on performance and user experience. Collaborate with backend
-                    developers to integrate services.
+                <div className='flex-col w-full pt-4  '>
+                  <div className='text-sm text-gray-500 flex   space-x-1 items-center pb-4'>
+                    Description: {modaldata?.Description}
                   </div>
-                  <div className='text-sm text-gray-500 flex  space-x-1 items-center'>
-                    Requirements: Build responsive web applications with a focus
-                    on performance and user experience. Collaborate with backend
-                    developers to integrate services.
+                  <div className='text-sm text-gray-500 flex  space-x-1 items-start'>
+                    <div>Requirements:</div>{' '}
+                    <ul>
+                      {modaldata?.Requirements?.map((item: any, i: any) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -77,7 +85,7 @@ export default function BigCard() {
             <div className='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
               <button
                 type='button'
-                onClick={() => setOpen(false)}
+                onClick={() => dispatch(setModal(false), setModalData(null))}
                 className='inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto'>
                 Apply
               </button>

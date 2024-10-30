@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export declare interface AuthState {
-  isConnectWallet: boolean;
+  modal: boolean;
+  modaldata: any;
 }
