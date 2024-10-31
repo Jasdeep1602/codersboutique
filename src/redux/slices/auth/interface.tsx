@@ -2,4 +2,5 @@
 export declare interface AuthState {
   modal: boolean;
   modaldata: any;
+  jobdata: any;
 }
