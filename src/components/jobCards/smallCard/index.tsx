@@ -34,7 +34,7 @@ export default function SmallCard({
   return (
     <>
       <div
-        className='rounded-md w-full bg-white px-4 py-4 shadow-md transition transform duration-500 cursor-pointer'
+        className='rounded-md w-full bg-white px-4 py-4 shadow-md transition transform duration-500 cursor-pointer hover:bg-slate-100 hover:translate-x-1'
         onClick={() => handleBigCardModal(data)}>
         <div className='flex flex-col justify-start'>
           <div className='flex justify-between items-center w-[700px]'>
