@@ -18,7 +18,6 @@ export default function Dropdown() {
     const value = (e.target as HTMLElement).innerText;
 
     if (value === 'Cancel') {
-      // Reset to show the original job data list
       dispatch(setJobData(jobAPI));
       console.log(jobdata, 'Cancel');
     } else {
@@ -34,7 +33,7 @@ export default function Dropdown() {
   return (
     <Menu as='div' className='relative inline-block text-left cursor-pointer'>
       <div>
-        <MenuButton className='inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'>
+        <MenuButton className='inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'>
           Job-Type
           <ChevronDownIcon
             aria-hidden='true'
