@@ -19,7 +19,6 @@ export default function Home() {
           <SearchBar />
           <Dropdown />
         </div>
-
         <CardList data={jobdata} />
       </main>
     </div>
